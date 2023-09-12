@@ -1,0 +1,72 @@
+import java.util.Scanner;
+
+public class TestGrades {
+    public static void main(String[] args) {
+        // Create a Scanner object to read input from the user
+        Scanner scanner = new Scanner(System.in);
+        char choice='n';
+        do {
+        	int score;
+            float total=0;
+            int passed = 0;
+            int A = 0;
+            int B = 0;
+            int C = 0;
+            int D = 0;
+            int F = 0;
+
+            // Continuously prompt the user to enter a score
+            // until a negative value is provided
+            while (true) {
+                System.out.print("Enter a score(Enter -1 to Stop): ");
+                score = scanner.nextInt();
+                if(score>100 || score<-1) {
+                	System.out.println("Score "+score+" Rejected");
+                }
+                if(score<=100 && score>=0) {
+                	total+=score;
+                }
+                if (score ==-1) {
+                    break;
+                }
+
+                if (score >= 70 && score<=100) {
+                    passed++;
+                }
+
+                if (score >= 90) {
+                    A++;
+                } else if (score >= 80) {
+                    B++;
+                } else if (score >= 70) {
+                    C++;
+                } else if (score >= 60) {
+                    D++;
+                } else {
+                    F++;
+                }
+            }
+
+            System.out.println("\nHere is your report:");
+            System.out.println("\t- A total of "+(passed+D+F)+" scores entered. "+passed+" of them are 70 or higher.");
+            System.out.println("\n\t- Letter Grade distribution of the scores");
+            System.out.println("\t\t- "+A+" earned the grade of A(90-100)");
+            System.out.println("\t\t- "+B+" earned the grade of B(80-89)");
+            System.out.println("\t\t- "+C+" earned the grade of C(70-79)");
+            System.out.println("\t\t- "+D+" earned the grade of D(60-69)");
+            System.out.println("\t\t- "+F+" earned the grade of 7 (59 or below)");
+            
+            System.out.println("\n\t-The average score is: "+Math.round(total/(passed+D+F)*Math.pow(10, 2))/Math.pow(10, 2));
+            
+            System.out.print("Would you like to process another class?(Y or N): ");
+            choice=scanner.next().charAt(0);
+            if(choice=='n'||choice=='N')
+            {
+            	System.out.println("Goodbye!");
+            	return;
+            }
+            
+        }while(choice=='y'||choice=='Y');
+        
+    }
+}
